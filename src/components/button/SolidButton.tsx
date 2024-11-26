@@ -8,7 +8,6 @@ interface SolidButtonProps {
   size?: "small" | "large";
   style: "orange300" | "orange200" | "outOrange300" | "outOrange200";
   disabled?: boolean;
-  [key: string]: any;
 }
 
 const SolidButton = ({

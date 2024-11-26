@@ -6,7 +6,6 @@ import deleteIconLarge from "@/../public/icon/trash-lg.svg";
 
 interface DeletebuttonProps {
   size?: "small" | "large";
-  [key: string]: any;
 }
 
 const DeleteButton = ({ size = "small", ...rest }: DeletebuttonProps) => {

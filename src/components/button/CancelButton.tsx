@@ -3,7 +3,6 @@
 interface CancelbuttonProps {
   children: string;
   size?: "small" | "large";
-  [key: string]: any;
 }
 
 const CancelButton = ({

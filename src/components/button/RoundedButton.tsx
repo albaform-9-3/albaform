@@ -3,7 +3,6 @@
 interface RoundedButtonProps {
   children: string;
   size?: "small" | "large";
-  [key: string]: any;
 }
 
 const RoundedButton = ({
