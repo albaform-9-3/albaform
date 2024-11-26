@@ -75,8 +75,8 @@ const SortButton = ({
   const sizeFontStyle = size === "small" ? "text-xs" : "text-base";
   const sizeUlStyle =
     size === "small"
-      ? "w-20 p-[3px] gap-y-[6px] mt-[6px]"
-      : "w-[132px] p-2 gap-y-[14px] mt-2";
+      ? "min-w-[80px] max-w-[200px] p-[3px] gap-y-[6px] mt-[6px]"
+      : "min-w-[132px] max-w-[250px] p-2 gap-y-[14px] mt-2";
 
   const buttonClass = `flex items-center bg-white ${sizeFontStyle} font-semibold text-black-300`;
   const ulClass = `absolute right-0 z-10 flex ${sizeUlStyle} flex-col rounded-lg border border-line-100 bg-white shadow-md`;
