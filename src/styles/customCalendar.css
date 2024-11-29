@@ -12,20 +12,14 @@ abbr {
 }
 
 .react-calendar {
-  width: 327px;
-  max-width: 200%;
+  width: 100%;
   background: white;
-  padding: 14px;
   font-size: 14px;
   line-height: 22px;
   font-weight: 500;
-  border: 1px solid var(--gray-200);
-  border-radius: 12px;
   font-family: "Pretendard", "Arial", "Helvetica", sans-serif;
 
   @media (min-width: 1200px) {
-    width: 640px;
-    padding: 36px;
     font-size: 20px;
     line-height: 32px;
   }
@@ -36,8 +30,9 @@ abbr {
   justify-content: center;
   align-items: center;
   padding: 14px;
+  font-weight: 600;
   height: 48px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 
   @media (min-width: 1200px) {
     height: 60px;
@@ -84,43 +79,53 @@ abbr {
   color: var(--gray-100);
 }
 
+.react-calendar__tile:hover {
+  color: var(--orange-100);
+}
+
+.react-calendar__tile--now {
+  color: var(--orange-300);
+}
+
+.react-calendar__tile--rangeStart > abbr {
+  background-color: var(--orange-300);
+  border-radius: 50%;
+  color: white;
+}
+
+.react-calendar__tile--rangeEnd > abbr {
+  background-color: var(--orange-300);
+  border-radius: 50%;
+  color: white;
+}
+
+.react-calendar--selectRange .react-calendar__tile--hover {
+  /* 날짜 범위 선택 시 호버 상태의 타일 */
+  background-color: var(--orange-50);
+  border-radius: inherit;
+  color: var(--orange-100);
+}
+
+.react-calendar--selectRange .react-calendar__tile--hover > abbr {
+  background-color: inherit;
+  border-radius: inherit;
+  color: inherit;
+}
+
 .react-calendar__month-view__days__day--neighboringMonth:disabled,
 .react-calendar__decade-view__years__year--neighboringDecade:disabled,
 .react-calendar__century-view__decades__decade--neighboringCentury:disabled {
   color: var(--gray-100);
 }
 
-.react-calendar__month-view__days__day:hover abbr,
-.react-calendar__month-view__days__day:focus abbr {
+.react-calendar__month-view__days__day:hover
+  .react-calendar__month-view__days__day:focus {
   background-color: var(--orange-300);
   border-radius: 50%;
   color: white;
 }
 
-.react-calendar__tile--now {
-  color: var(--orange-100);
-}
-
-.react-calendar__year-view__months__month>abbr {
+.react-calendar__year-view__months__month > abbr {
   width: 100%;
   height: 100%;
-}
-
-.in-range {
-  background-color: var(--orange-100);
-  /* 밝은 노란색 배경 */
-  color: white;
-  /* 텍스트 색상 */
-}
-
-.react-calendar__tile--rangeStart.in-range {
-  background-color: var(--orange-100);
-  color: white;
-  border-radius: 50% 0 0 50%;
-}
-
-.react-calendar__tile--rangeEnd.in-range {
-  background-color: var(--orange-100);
-  color: white;
-  border-radius: 0 50% 50% 0;
 }
