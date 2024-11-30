@@ -52,7 +52,7 @@ abbr {
 .react-calendar__month-view__weekdays {
   text-align: center;
   font-weight: bold;
-  color: var(--gray-500);
+  color: #808080;
   text-decoration: none;
 }
 
@@ -63,7 +63,7 @@ abbr {
 .react-calendar__month-view__days__day--neighboringMonth,
 .react-calendar__decade-view__years__year--neighboringDecade,
 .react-calendar__century-view__decades__decade--neighboringCentury {
-  color: var(--gray-100);
+  color: #dedede;
 }
 
 .react-calendar__tile {
@@ -76,37 +76,37 @@ abbr {
 
 .react-calendar__tile:disabled {
   background-color: #f0f0f0;
-  color: var(--gray-100);
+  color: #dedede;
 }
 
 .react-calendar__tile:hover {
-  color: var(--orange-100);
+  color: #fcc369;
 }
 
 .react-calendar__tile--now {
-  color: var(--orange-300);
+  color: #f89a05;
 }
 
-.react-calendar__tile--rangeStart > abbr {
-  background-color: var(--orange-300);
+.react-calendar__tile--rangeStart>abbr {
+  background-color: #f89a05;
   border-radius: 50%;
   color: white;
 }
 
-.react-calendar__tile--rangeEnd > abbr {
-  background-color: var(--orange-300);
+.react-calendar__tile--rangeEnd>abbr {
+  background-color: #f89a05;
   border-radius: 50%;
   color: white;
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover {
   /* 날짜 범위 선택 시 호버 상태의 타일 */
-  background-color: var(--orange-50);
+  background-color: #fff7eb;
   border-radius: inherit;
-  color: var(--orange-100);
+  color: #fcc369;
 }
 
-.react-calendar--selectRange .react-calendar__tile--hover > abbr {
+.react-calendar--selectRange .react-calendar__tile--hover>abbr {
   background-color: inherit;
   border-radius: inherit;
   color: inherit;
@@ -115,17 +115,16 @@ abbr {
 .react-calendar__month-view__days__day--neighboringMonth:disabled,
 .react-calendar__decade-view__years__year--neighboringDecade:disabled,
 .react-calendar__century-view__decades__decade--neighboringCentury:disabled {
-  color: var(--gray-100);
+  color: #dedede;
 }
 
-.react-calendar__month-view__days__day:hover
-  .react-calendar__month-view__days__day:focus {
-  background-color: var(--orange-300);
+.react-calendar__month-view__days__day:hover .react-calendar__month-view__days__day:focus {
+  background-color: #f89a05;
   border-radius: 50%;
   color: white;
 }
 
-.react-calendar__year-view__months__month > abbr {
+.react-calendar__year-view__months__month>abbr {
   width: 100%;
   height: 100%;
 }

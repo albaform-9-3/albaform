@@ -5,37 +5,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --background-100: #fcfcfc;
-  --background-200: #f7f7f7;
-  --background-300: #efefef;
-  --line-100: #f2f2f2;
-  --line-200: #e6e6e6;
-  --gray-50: #ffffff;
-  --gray-100: #dedede;
-  --gray-200: #c4c4c4;
-  --gray-300: #ababab;
-  --gray-400: #999999;
-  --gray-500: #808080;
-  --black-100: #6b6b6b;
-  --black-200: #525252;
-  --black-300: #373737;
-  --black-400: #1f1f1f;
-  --black-500: #040404;
-  --orange-50: #fff7eb;
-  --orange-100: #fcc369;
-  --orange-200: #fbaf37;
-  --orange-300: #f89a05;
-  --orange-400: #e18c05;
-  --orange-500: #fff7eb;
-  --blue-100: #535779;
-  --blue-200: #3e415b;
-  --blue-300: #2a2c3d;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-    format("woff");
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -87,12 +61,15 @@ body {
 
   /* 스크롤바 숨기기 - 전상민 */
   .scrollbar-hidden {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
   }
 
   .scrollbar-hidden::-webkit-scrollbar {
-    display: none; /* Chrome; Safari; Edge */
+    display: none;
+    /* Chrome; Safari; Edge */
   }
 
   /* PC 크기에서 적용될 스타일 */
@@ -112,6 +89,7 @@ body {
 }
 
 @layer base {
+
   /* input 태그에 포커스가 되었을 때 캐럿 색상과 테두리 제거 - 문창기 */
   input:focus {
     @apply caret-orange-300 outline-none;
