@@ -1,5 +1,5 @@
 import { useSetAtom } from "jotai";
-import { authAtom } from "@/atoms/tokenAtomStore";
+import { authAtom } from "@/atoms/tokenAtom";
 import Cookies from "js-cookie";
 
 const useToken = () => {

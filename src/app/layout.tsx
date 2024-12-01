@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import Header from "../components/header/Header";
 import Sidebar from "@/components/header/Sidebar";
 import ModalManager from "@/components/modal/modalManager/ModalManager";
+import ToastContainer from "@/components/toast/ToastContainer";
 
 export const metadata: Metadata = {
   title: {
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Sidebar />
         <Header />
         <ModalManager />
+        <ToastContainer />
         {children}
       </body>
     </html>

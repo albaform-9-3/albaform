@@ -2,7 +2,6 @@ import { z } from "zod";
 
 const passwordValidation = z
   .string()
-  .min(1, { message: "비밀번호를 입력해주세요." })
   .max(12, { message: "비밀번호는 12자 이내여야합니다." })
   .regex(
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!\"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).{7,}$/,

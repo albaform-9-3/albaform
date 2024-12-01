@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import ModalContainer from "../modalContainer/ModalContainer";
 import FormInput from "@/components/input/FormInput";
@@ -7,8 +9,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { changeMyInfoSchema } from "@/schema/modal/changeMyInfoSchema";
 import { z } from "zod";
+import SolidButton from "@/components/button/SolidButton";
+import useViewPort from "@/hooks/useViewport";
+import { useModal } from "@/hooks/useModal";
 
 const ChangeMyInfoModal = () => {
+  const { closeModal } = useModal();
+  const viewPort = useViewPort();
   const [previewSrc, setPreviewSrc] = useState("");
   const {
     register,
@@ -110,12 +117,31 @@ const ChangeMyInfoModal = () => {
           </div>
 
           <div className="mt-6 flex gap-[11px] pc:mt-[30px] pc:gap-3">
-            <button className="h-[58px] w-[158px] rounded-[8px] border bg-gray-100 text-white pc:h-[72px] pc:w-[314px]">
-              취소
-            </button>
-            <button className="h-[58px] w-[158px] rounded-[8px] border bg-orange-300 text-white pc:h-[72px] pc:w-[314px]">
-              수정하기
-            </button>
+            <div className={buttmonContainerStyle}>
+              <SolidButton
+                size={viewPort === "pc" ? "large" : "small"}
+                style="gray100"
+                type="button"
+                onClick={() => {
+                  closeModal();
+                }}
+              >
+                취소
+              </SolidButton>
+            </div>
+            <div className={buttmonContainerStyle}>
+              <SolidButton
+                disabled={!isValid || isSubmitting}
+                size={viewPort === "pc" ? "large" : "small"}
+                style="orange300"
+                type="submit"
+                onClick={() => {
+                  closeModal();
+                }}
+              >
+                수정하기
+              </SolidButton>
+            </div>
           </div>
         </form>
       </div>
@@ -129,3 +155,4 @@ const labelStyle =
   "text-md font-regular text-black-400 w-fit cursor-pointer pc:text-lg";
 const inputStyle =
   "mt-[8px] rounded-[8px] bg-gray-50 p-[14px] placeholder:text-md placeholder:font-regular border focus:boder-orange-300";
+const buttmonContainerStyle = "h-[58px] w-[158px] pc:h-[72px] pc:w-[314px]";

@@ -1,6 +1,6 @@
 "use client";
 
-import { applicationStatusAtom } from "@/atoms/dropdownAtomStore";
+import { recruitStatusAtom } from "@/atoms/dropdownAtomStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,31 +9,30 @@ import {
 } from "@/components/dropdown/DropdownMenu";
 import { useAtom } from "jotai";
 
-// import한 컴포넌트에서 useAtomValue로 applicationStatus 값을 받으세요.
-const ApplicationDropdown = () => {
-  const [applicationStatus, setApplicationStatus] = useAtom(
-    applicationStatusAtom
-  );
+const RecruitDropdown = () => {
+  const [recruitStatus, setRecruitStatus] = useAtom(recruitStatusAtom);
 
-  const handleClick = (status: boolean | undefined) => {
-    setApplicationStatus(status);
+  const handleClick = (status: string | undefined) => {
+    setRecruitStatus(status);
   };
 
   const valueArr = [
     { value: "전체", status: undefined },
-    { value: "모집 중", status: true },
-    { value: "모집 마감", status: false },
+    { value: "거절", status: "REJECTED" },
+    { value: "면접 대기", status: "INTERVIEW_PENDING" },
+    { value: "면접 완료", status: "INTERVIEW_COMPLETED" },
+    { value: "채용 완료", status: "HIRED" },
   ];
 
   return (
     <DropdownMenu className="w-20 pc:w-[126px]">
       <DropdownMenuTrigger
         checkedValue={
-          valueArr.find((item) => item.status === applicationStatus)?.value
+          valueArr.find((item) => item.status === recruitStatus)?.value
         }
-        id="application"
+        id="recruit"
       />
-      <DropdownMenuContent id="application" className="pc:w-[126px]">
+      <DropdownMenuContent id="recruit" className="pc:w-[126px]">
         {valueArr.map((item) => (
           <DropdownMenuItem
             key={item.value}
@@ -48,4 +47,4 @@ const ApplicationDropdown = () => {
   );
 };
 
-export default ApplicationDropdown;
+export default RecruitDropdown;

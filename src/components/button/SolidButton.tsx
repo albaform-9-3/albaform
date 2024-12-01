@@ -6,7 +6,12 @@ interface SolidButtonProps {
   icon?: string;
   children: string;
   size?: "small" | "large";
-  style: "orange300" | "orange200" | "outOrange300" | "outOrange200";
+  style:
+    | "orange300"
+    | "orange200"
+    | "gray100"
+    | "outOrange300"
+    | "outOrange200";
   disabled?: boolean;
   [key: string]: any;
 }
@@ -23,11 +28,13 @@ const SolidButton = ({
   const styles = {
     buttonOrange300: "bg-orange-300 text-white active:scale-95",
     buttonOrange200: "bg-orange-200 text-white active:scale-95",
+    buttonGray100: "bg-gray-100 text-white active:scale-95",
     outButtonOrange300:
       "border border-orange-300 bg-transparent text-orange-300 active:scale-95",
     outButtonOrange200:
       "border border-orange-200 bg-transparent text-orange-200 active:scale-95",
     disabledButtonOrange: "bg-gray-100 text-white",
+    disabledButtonGray: "bg-gray-100 text-white",
     disabledOutButtonOrange:
       "border border-gray-100 bg-transparent text-gray-100",
   };
@@ -36,6 +43,7 @@ const SolidButton = ({
   const buttonStyles = {
     orange300: disabled ? styles.disabledButtonOrange : styles.buttonOrange300,
     orange200: disabled ? styles.disabledButtonOrange : styles.buttonOrange200,
+    gray100: disabled ? styles.disabledButtonGray : styles.buttonGray100,
     outOrange300: disabled
       ? styles.disabledOutButtonOrange
       : styles.outButtonOrange300,
@@ -51,7 +59,7 @@ const SolidButton = ({
   };
 
   // 공통
-  const commonClass = `flex items-center gap-x-2 font-semibold rounded-lg justify-center transition-transform duration-200 ease-out hover:opacity-90}`;
+  const commonClass = `flex items-center gap-x-2 font-semibold rounded-lg justify-center transition-transform duration-200 ease-out hover:opacity-90`;
 
   // 최종 스타일
   const finalClassName = `${commonClass} ${sizeStyle[size]} ${buttonStyles[style]}`;

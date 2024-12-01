@@ -1,6 +1,6 @@
 "use client";
 
-import { applicationStatusAtom } from "@/atoms/dropdownAtomStore";
+import { publicStatusAtom } from "@/atoms/dropdownAtomStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,36 +9,34 @@ import {
 } from "@/components/dropdown/DropdownMenu";
 import { useAtom } from "jotai";
 
-// import한 컴포넌트에서 useAtomValue로 applicationStatus 값을 받으세요.
-const ApplicationDropdown = () => {
-  const [applicationStatus, setApplicationStatus] = useAtom(
-    applicationStatusAtom
-  );
+// import한 컴포넌트에서 useAtomValue로 publicStatus 값을 받으세요.
+const PublicDropdown = () => {
+  const [publicStatus, setPublicStatus] = useAtom(publicStatusAtom);
 
   const handleClick = (status: boolean | undefined) => {
-    setApplicationStatus(status);
+    setPublicStatus(status);
   };
 
   const valueArr = [
     { value: "전체", status: undefined },
-    { value: "모집 중", status: true },
-    { value: "모집 마감", status: false },
+    { value: "공개", status: true },
+    { value: "비공개", status: false },
   ];
 
   return (
     <DropdownMenu className="w-20 pc:w-[126px]">
       <DropdownMenuTrigger
         checkedValue={
-          valueArr.find((item) => item.status === applicationStatus)?.value
+          valueArr.find((item) => item.status === publicStatus)?.value
         }
-        id="application"
+        id="public"
       />
-      <DropdownMenuContent id="application" className="pc:w-[126px]">
+      <DropdownMenuContent id="public" className="pc:w-[126px]">
         {valueArr.map((item) => (
           <DropdownMenuItem
             key={item.value}
             onClick={() => handleClick(item.status)}
-            className="py-1.5 pl-2.5 pr-2 text-start pc:py-2 pc:pl-4 pc:pr-3 pc:text-2lg"
+            className="py-1.5 pl-2.5 pr-2 text-start shadow-lg pc:py-2 pc:pl-4 pc:pr-3 pc:text-2lg"
           >
             {item.value}
           </DropdownMenuItem>
@@ -48,4 +46,4 @@ const ApplicationDropdown = () => {
   );
 };
 
-export default ApplicationDropdown;
+export default PublicDropdown;

@@ -9,8 +9,13 @@ import FormInput from "@/components/input/FormInput";
 import ErrorText from "@/components/errorText/ErrorText";
 import Image from "next/image";
 import { useState } from "react";
+import SolidButton from "@/components/button/SolidButton";
+import { useModal } from "@/hooks/useModal";
+import useViewPort from "@/hooks/useViewport";
 
 const GetMyApplicationModal = () => {
+  const { closeModal } = useModal();
+  const viewPort = useViewPort();
   const [visible, setVisible] = useState(false);
   const {
     register,
@@ -33,9 +38,9 @@ const GetMyApplicationModal = () => {
   return (
     <ModalContainer>
       <div className="flex flex-col pb-[8px]">
-        <strong className="text-2lg font-semibold text-black-400 pc:text-[32px] pc:leading-[46px]">
+        <h2 className="text-2lg font-semibold text-black-400 pc:text-[32px] pc:leading-[46px]">
           내 지원 내역
-        </strong>
+        </h2>
         <div className="mt-6 text-md font-medium text-gray-400 pc:mt-8 pc:text-lg">
           <p>
             지원일시{" "}
@@ -113,11 +118,21 @@ const GetMyApplicationModal = () => {
               {errors.password?.message}
             </ErrorText>
           </div>
-        </form>
 
-        <button className="mt-[24px] w-[327px] rounded-[8px] bg-orange-300 p-[16px] text-white pc:mt-[46px]">
-          지원 내역 상세 보기
-        </button>
+          <div className="mt-6 w-[327px] pc:mt-[46px] pc:w-[360px]">
+            <SolidButton
+              disabled={!isValid || isSubmitting}
+              size={viewPort === "pc" ? "large" : "small"}
+              style="orange300"
+              type="submit"
+              onClick={() => {
+                closeModal();
+              }}
+            >
+              지원 내역 상세 보기
+            </SolidButton>
+          </div>
+        </form>
       </div>
     </ModalContainer>
   );
@@ -128,4 +143,4 @@ export default GetMyApplicationModal;
 const labelStyle =
   "text-md font-regular text-black-400 w-fit cursor-pointer pc:text-lg";
 const inputStyle =
-  "mt-[8px] rounded-[8px] bg-background-200 p-[14px] placeholder:text-md placeholder:font-regular border focus:outline-orange-300";
+  "mt-[8px] rounded-[8px] bg-background-200 p-[14px] placeholder:text-md placeholder:font-regular border focus:border-orange-300";

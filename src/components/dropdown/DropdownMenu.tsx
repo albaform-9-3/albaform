@@ -15,7 +15,7 @@ const DropdownMenu = ({
   return (
     <div
       className={cls(
-        "flex w-20 flex-col overflow-hidden rounded bg-white pc:w-[126px]",
+        "flex-col overflow-hidden rounded",
         className ? className : ""
       )}
     >
@@ -26,10 +26,14 @@ const DropdownMenu = ({
 
 // 드롭다운 메뉴 트리거
 const DropdownMenuTrigger = ({
+  asChild,
+  children,
   checkedValue,
   className,
   id,
 }: {
+  asChild?: boolean;
+  children?: React.ReactNode;
   checkedValue: boolean | string | undefined;
   className?: string;
   id: string;
@@ -58,12 +62,24 @@ const DropdownMenuTrigger = ({
     setDropdownTrigger(!dropdownTrigger);
   };
 
+  if (asChild) {
+    return (
+      <button
+        ref={triggerRef}
+        className="relative mb-1 w-full cursor-pointer"
+        onClick={handleClick}
+      >
+        {children}
+      </button>
+    );
+  }
+
   return (
     <button
       ref={triggerRef}
       onClick={handleClick}
       className={cls(
-        "mb-1 flex items-center justify-between rounded border-[1px] bg-white py-1.5 pl-2.5 pr-2 text-start text-xs text-black-100 pc:py-2 pc:pl-4 pc:pr-3 pc:text-2lg",
+        "relative mb-1 flex w-full items-center justify-between rounded border-[1px] bg-white py-1.5 pl-2.5 pr-2 text-start text-xs text-black-100 pc:py-2 pc:pl-4 pc:pr-3 pc:text-2lg",
         className ? className : ""
       )}
     >
@@ -82,15 +98,22 @@ const DropdownMenuTrigger = ({
 const DropdownMenuContent = ({
   children,
   id,
+  className,
 }: {
   children: React.ReactNode;
   id: string;
+  className?: string;
 }) => {
   const dropdownTrigger = useAtomValue(dropdownTriggerAtom(id));
 
   return (
     dropdownTrigger && (
-      <div className="flex flex-col overflow-hidden rounded border-[1px]">
+      <div
+        className={cls(
+          "absolute z-10 flex w-20 flex-col overflow-hidden rounded border-[1px]",
+          className ? className : ""
+        )}
+      >
         {children}
       </div>
     )
@@ -111,7 +134,7 @@ const DropdownMenuItem = ({
     <button
       onClick={onClick}
       className={cls(
-        "w-full border-gray-100 bg-white py-1.5 pl-2.5 pr-2 text-start text-xs text-black-100 transition-all hover:bg-orange-500 hover:text-orange-300 pc:py-2 pc:pl-4 pc:pr-3 pc:text-2lg",
+        "w-full border-gray-100 bg-white text-xs text-black-100 transition-all hover:bg-orange-500 hover:text-orange-300",
         className ? className : ""
       )}
     >

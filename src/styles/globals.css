@@ -86,6 +86,37 @@ body {
       @apply mt-[16px] text-xl;
     }
   }
+
+  /* Toast 애니메이션 - 정우영 */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-toast-in {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  .animate-toast-out {
+    animation: fadeOut 0.4s ease-out;
+  }
 }
 
 @layer base {
