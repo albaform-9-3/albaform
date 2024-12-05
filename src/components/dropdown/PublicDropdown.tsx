@@ -1,20 +1,27 @@
 "use client";
 
-import { publicStatusAtom } from "@/atoms/dropdownAtomStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/dropdown/DropdownMenu";
-import { useAtom } from "jotai";
+import { useState } from "react";
 
-// import한 컴포넌트에서 useAtomValue로 publicStatus 값을 받으세요.
+// isPublic 값을 URL에서 추출하여 서버로 전달하세요.
 const PublicDropdown = () => {
-  const [publicStatus, setPublicStatus] = useAtom(publicStatusAtom);
+  const [isPublic, setIsPublic] = useState<boolean | undefined>(undefined);
 
   const handleClick = (status: boolean | undefined) => {
-    setPublicStatus(status);
+    setIsPublic(status);
+    const params = new URLSearchParams(window.location.search);
+    if (status === undefined) {
+      params.delete("isPublic");
+    } else {
+      params.set("isPublic", status?.toString() || "");
+    }
+
+    window.history.pushState({}, "", `?${params}`);
   };
 
   const valueArr = [
@@ -26,9 +33,7 @@ const PublicDropdown = () => {
   return (
     <DropdownMenu className="w-20 pc:w-[126px]">
       <DropdownMenuTrigger
-        checkedValue={
-          valueArr.find((item) => item.status === publicStatus)?.value
-        }
+        checkedValue={valueArr.find((item) => item.status === isPublic)?.value}
         id="public"
       />
       <DropdownMenuContent id="public" className="pc:w-[126px]">

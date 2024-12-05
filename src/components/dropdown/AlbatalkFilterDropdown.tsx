@@ -1,21 +1,42 @@
 "use client";
 
-import { albatalkFilterAtom } from "@/atoms/dropdownAtomStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/dropdown/DropdownMenu";
-import { useAtom } from "jotai";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
+interface AlbatalkFilter {
+  title: string;
+  value: string;
+}
+
+// title은 화면에 표출되는 명칭, value는 실제 서버로 전달되는 값입니다.
+// albatalkOrderBy 값을 URL에서 추출하여 서버로 전달하세요.
 const AlbatalkFilterDropdown = () => {
-  const [albatalkFilter, setAlbatalkFilter] = useAtom(albatalkFilterAtom);
+  const [albatalkFilter, setAlbatalkFilter] = useState<AlbatalkFilter>({
+    title: "최신 순",
+    value: "mostRecent",
+  });
+
+  const updateURL = (value: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("albatalkOrderBy", value);
+
+    window.history.pushState({}, "", `?${params}`);
+  };
 
   const handleClick = (value: string, title: string) => {
     setAlbatalkFilter({ value, title });
+    updateURL(value);
   };
+
+  useEffect(() => {
+    updateURL(albatalkFilter.value);
+  }, [albatalkFilter.value]);
 
   const valueArr = [
     { title: "최신 순", value: "mostRecent" },

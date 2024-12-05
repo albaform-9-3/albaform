@@ -1,24 +1,42 @@
 "use client";
 
-import { orderByAtom } from "@/atoms/dropdownAtomStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/dropdown/DropdownMenu";
-import { useAtom } from "jotai";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+
+interface OrderBy {
+  title: string;
+  value: string;
+}
 
 // title은 화면에 표출되는 명칭, value는 실제 서버로 전달되는 값입니다.
-// orderBy.value, orderBy.title 형식으로 사용해주세요.
-// 이 드롭다운은 트리거 역할을 하는 children 요소가 고정요소여서 해당 요소를 넣어놨습니다.
+// orderBy 값을 URL에서 추출하여 서버로 전달하세요.
 const OrderByDropdown = () => {
-  const [orderBy, setOrderBy] = useAtom(orderByAtom);
+  const [orderBy, setOrderBy] = useState<OrderBy>({
+    title: "최신 순",
+    value: "mostRecent",
+  });
+
+  const updateURL = (value: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("orderBy", value);
+
+    window.history.pushState({}, "", `?${params}`);
+  };
 
   const handleClick = (value: string, title: string) => {
     setOrderBy({ value, title });
+    updateURL(value);
   };
+
+  useEffect(() => {
+    updateURL(orderBy.value);
+  }, [orderBy.value]);
 
   const valueArr = [
     { title: "최신 순", value: "mostRecent" },

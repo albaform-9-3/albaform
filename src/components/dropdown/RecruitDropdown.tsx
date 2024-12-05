@@ -1,19 +1,30 @@
 "use client";
 
-import { recruitStatusAtom } from "@/atoms/dropdownAtomStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/dropdown/DropdownMenu";
-import { useAtom } from "jotai";
+import { useState } from "react";
 
+// status 값을 URL에서 추출하여 서버로 전달하세요.
 const RecruitDropdown = () => {
-  const [recruitStatus, setRecruitStatus] = useAtom(recruitStatusAtom);
+  const [recruitStatus, setRecruitStatus] = useState<string | undefined>(
+    undefined
+  );
 
   const handleClick = (status: string | undefined) => {
     setRecruitStatus(status);
+    const params = new URLSearchParams(window.location.search);
+
+    if (status === undefined) {
+      params.delete("status");
+    } else {
+      params.set("status", status || "");
+    }
+
+    window.history.pushState({}, "", `?${params}`);
   };
 
   const valueArr = [

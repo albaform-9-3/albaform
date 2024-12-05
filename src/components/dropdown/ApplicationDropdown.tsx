@@ -1,22 +1,30 @@
 "use client";
 
-import { applicationStatusAtom } from "@/atoms/dropdownAtomStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/dropdown/DropdownMenu";
-import { useAtom } from "jotai";
+import { useState } from "react";
 
-// import한 컴포넌트에서 useAtomValue로 applicationStatus 값을 받으세요.
+// isRecruiting 값을 URL에서 추출하여 서버로 전달하세요.
 const ApplicationDropdown = () => {
-  const [applicationStatus, setApplicationStatus] = useAtom(
-    applicationStatusAtom
+  const [isRecruiting, setIsRecruiting] = useState<boolean | undefined>(
+    undefined
   );
 
   const handleClick = (status: boolean | undefined) => {
-    setApplicationStatus(status);
+    setIsRecruiting(status);
+    const params = new URLSearchParams(window.location.search);
+
+    if (status === undefined) {
+      params.delete("isRecruiting");
+    } else {
+      params.set("isRecruiting", status?.toString() || "");
+    }
+
+    window.history.pushState({}, "", `?${params}`);
   };
 
   const valueArr = [
@@ -29,7 +37,7 @@ const ApplicationDropdown = () => {
     <DropdownMenu className="w-20 pc:w-[126px]">
       <DropdownMenuTrigger
         checkedValue={
-          valueArr.find((item) => item.status === applicationStatus)?.value
+          valueArr.find((item) => item.status === isRecruiting)?.value
         }
         id="application"
       />

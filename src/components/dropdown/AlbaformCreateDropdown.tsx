@@ -1,25 +1,48 @@
 "use client";
 
-import {
-  albaformCreateStepAtom,
-  dropdownTriggerAtom,
-} from "@/atoms/dropdownAtomStore";
+import { dropdownTriggerAtom } from "@/atoms/dropdownAtomStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/dropdown/DropdownMenu";
-import { useAtom, useAtomValue } from "jotai";
+import useViewPort from "@/hooks/useViewport";
+import { useAtomValue } from "jotai";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-// 알바폼 생성 컴포넌트에서 currentStep 값을 받아서 단계별 form을 표출하는데 사용하세요.
-// currentStep.value 형식으로 받으셔야 합니다.
+interface AlbaformCreateStep {
+  title: string;
+  value: string;
+}
+
+// 알바폼 생성 컴포넌트 URL에서 albaformStep 값을 받아서 단계별 form을 표출하는데 사용하세요.
 const AlbaformCreateDropdown = () => {
+  const viewPort = useViewPort();
   const [stepNum, setStepNum] = useState(1);
-  const [currentStep, setCurrentStep] = useAtom(albaformCreateStepAtom);
+  const [currentStep, setCurrentStep] = useState<AlbaformCreateStep>({
+    title: "모집 내용",
+    value: "stepOne",
+  });
   const isOpen = useAtomValue(dropdownTriggerAtom("albaformCreate"));
+
+  const updateURL = (value: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("albaformStep", value);
+
+    window.history.pushState({}, "", `?${params}`);
+  };
+
+  useEffect(() => {
+    if (viewPort === "mobile" || viewPort === "tablet") {
+      updateURL(currentStep.value);
+    } else {
+      const params = new URLSearchParams(window.location.search);
+      params.delete("albaformStep");
+      window.history.pushState({}, "", `?${params}`);
+    }
+  }, [currentStep.value, viewPort]);
 
   const handleClick = (value: string, stepNum: number, title: string) => {
     setCurrentStep({ title, value });
