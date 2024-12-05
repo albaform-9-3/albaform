@@ -31,7 +31,7 @@ const useFetchAlbatalkData = ({
     setIsLoading(true);
     try {
       const response: AlbatalkResponse = await getArticles({
-        limit: 9,
+        limit: 6,
         cursor: isReset ? 0 : cursor,
         keyword,
         orderBy,

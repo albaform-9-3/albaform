@@ -13,7 +13,7 @@ const AlbaTalkPage = async ({
   const { orderBy = "mostRecent", keyword = "" } = await searchParams;
 
   const response = await getArticles({
-    limit: 9,
+    limit: 6,
     cursor: 0,
     orderBy,
     keyword,

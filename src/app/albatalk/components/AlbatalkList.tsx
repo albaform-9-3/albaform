@@ -4,6 +4,7 @@ import PostCard from "@/components/card/PostCard";
 import { PostCardProps } from "@/types/post";
 import useInfinityScroll from "@/hooks/useInfinityScroll";
 import useFetchAlbatalkData from "../hooks/useFetchAlbatalkData";
+import Image from "next/image";
 
 const AlbatalkList = ({
   posts: initialPosts,
@@ -39,8 +40,20 @@ const AlbatalkList = ({
         <div>게시글이 없습니다</div> //빈페이지 필요
       )}
 
-      {/* 무한 스크롤 트리거 */}
-      {cursor && <div ref={observerRef} style={{ height: "1px" }} />}
+      {cursor && (
+        <>
+          <div className="mt-[60px] flex h-[200px] flex-col items-center tablet:hidden mobile:hidden">
+            더보기를 원하시면 스크롤을 내려주세요
+            <Image
+              src="/icon/arrow-fill-bottom.svg"
+              width={50}
+              height={50}
+              alt="더보기"
+            />
+          </div>
+          <div ref={observerRef} className="h-1"></div>
+        </>
+      )}
     </div>
   );
 };
