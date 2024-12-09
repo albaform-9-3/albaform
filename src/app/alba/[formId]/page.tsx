@@ -8,6 +8,7 @@ import SimpleRequirements from "./components/SimpleRequirements";
 import EmployerInfo from "./components/EmployerInfo";
 import DetailRequirements from "./components/DetailRequirements";
 import NoticeApplicant from "./components/NoticeApplicant";
+import NoticeIsClosed from "./components/NoticeIsClosed";
 import { PageProps } from "../../../../.next/types/app/page";
 import { AlbaformDetailData } from "@/types/alba";
 
@@ -60,6 +61,7 @@ const AlbarformDetailPage = async ({ params }: PageProps) => {
         </section>
       </div>
       <NoticeApplicant count={data.applyCount} />
+      <NoticeIsClosed closedDate={data.recruitmentEndDate} />
     </>
   );
 };

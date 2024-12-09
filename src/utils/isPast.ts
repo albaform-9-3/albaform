@@ -3,7 +3,7 @@ const isPast = (isoDateString: string) => {
 
   const targetDate = new Date(isoDateString);
 
-  return targetDate > currentDate;
+  return targetDate < currentDate;
 };
 
 export default isPast;
