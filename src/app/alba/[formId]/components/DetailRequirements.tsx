@@ -2,7 +2,7 @@ interface DetailRequirementsProps {
   age: string | "연령무관";
   education: string | "학력무관";
   gender: string | "성별무관";
-  numberOfPositions: number | "00명(인원미정)";
+  numberOfPositions: number;
   preferred: string;
 }
 
@@ -11,7 +11,10 @@ const DetailRequirements = ({ info }: { info: DetailRequirementsProps }) => {
     {
       id: 0,
       title: "모집인원",
-      content: info.numberOfPositions,
+      content:
+        info.numberOfPositions === 0 || !info.numberOfPositions
+          ? "00명(인원미정)"
+          : `${info.numberOfPositions}명`,
     },
     {
       id: 1,

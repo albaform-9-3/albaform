@@ -16,14 +16,14 @@ const SimpleRequirements = ({ info }: { info: SimpleRequirementsProps }) => {
     info.workEndDate
   );
 
-  const workdays = info.workDays.join(",");
+  const workdays = info.workDays.join(", ");
 
   const infoList = [
     {
       id: 0,
       href: "/icon/database-md.svg",
       title: "시급",
-      content: info.hourlyWage,
+      content: `${info.hourlyWage}원`,
     },
     {
       id: 1,
