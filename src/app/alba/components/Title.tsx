@@ -1,7 +1,6 @@
-import { AlbaformDetailData } from "@/types/alba";
-import ApplicantStats from "../../../../components/card/ApplicantStats";
 import isPast from "@/utils/isPast";
 import getCurrentTime from "@/utils/getCurrentTime";
+import ApplicantStats from "@/components/card/ApplicantStats";
 
 interface titleData {
   title: string;

@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import LinkShowAndCopy from "@/app/alba/[formId]/components/LinkShowAndCopy";
 import ModalContainer from "../modalContainer/ModalContainer";
 import shareToKakao from "@/utils/shareToKakao";
 import shareToFacebook from "@/utils/shareToFacebook";
 import shareToTwitter from "@/utils/sharetoTwitter";
+import LinkShowAndCopy from "@/app/alba/components/LinkShowAndCopy";
 import { useEffect } from "react";
 
 const ShareSNSModal = () => {

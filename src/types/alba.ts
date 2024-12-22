@@ -62,3 +62,17 @@ export interface AlbaformDetailData {
   storePhoneNumber: string;
   storeName: string;
 }
+
+export interface MyApplicationData {
+  applicantId: number;
+  updatedAt: string;
+  createdAt: string;
+  status: "REJECTED" | "INTERVIEW_PENDING" | "INTERVIEW_COMPLETED" | "HIRED";
+  introduction: string;
+  resumeName: string;
+  resumeId: number;
+  experienceMonths: number;
+  phoneNumber: string;
+  name: string;
+  id: number;
+}

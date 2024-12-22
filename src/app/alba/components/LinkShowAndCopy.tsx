@@ -1,6 +1,6 @@
 "use client";
 
-import CopyButton from "../../../../components/button/CopyButton";
+import CopyButton from "@/components/button/CopyButton";
 
 const LinkShowAndCopy = ({ url }: { url: string }) => {
   return (

@@ -1,16 +1,16 @@
 import Carousel from "@/components/Carousel/Carousel";
-import fetchData from "./fetchData";
-import Content from "./components/Content";
-import Title from "./components/Title";
-import StoreLocation from "./components/StoreLocation";
-import SimpleRequirements from "./components/SimpleRequirements";
-import EmployerInfo from "./components/EmployerInfo";
-import DetailRequirements from "./components/DetailRequirements";
-import NoticeApplicant from "./components/NoticeApplicant";
-import NoticeIsClosed from "./components/NoticeIsClosed";
-import ScrapAndShareButton from "./components/ScrapAndShareButton";
-import ApllicantActionButtons from "./components/ApllicantActionButtons";
-import OwnerActionButtons from "./components/OwnerActionButtons";
+import fetchAlbarformDetailData from "./fetchAlbarformDetailData";
+import Content from "../components/Content";
+import Title from "../components/Title";
+import StoreLocation from "../components/StoreLocation";
+import SimpleRequirements from "../components/SimpleRequirements";
+import EmployerInfo from "../components/EmployerInfo";
+import DetailRequirements from "../components/DetailRequirements";
+import NoticeApplicant from "../components/NoticeApplicant";
+import NoticeIsClosed from "../components/NoticeIsClosed";
+import ScrapAndShareButton from "../components/ScrapAndShareButton";
+import ApllicantActionButtons from "../components/ApllicantActionButtons";
+import OwnerActionButtons from "../components/OwnerActionButtons";
 import { AlbaformDetailData } from "@/types/alba";
 import { cookies } from "next/headers";
 import { cls } from "@/utils/dynamicTailwinds";
@@ -22,7 +22,7 @@ type PageProps = {
 export const generateMetadata = async ({ params }: PageProps) => {
   const { formId } = await params;
 
-  const data: AlbaformDetailData = await fetchData(formId);
+  const data: AlbaformDetailData = await fetchAlbarformDetailData(formId);
 
   return {
     title: "알바폼 상세페이지",
@@ -49,7 +49,7 @@ const AlbarformDetailPage = async ({ params }: PageProps) => {
   const { formId } = await params;
 
   try {
-    data = await fetchData(formId);
+    data = await fetchAlbarformDetailData(formId);
     isMyAlbarform = Number(userId) === data.ownerId;
   } catch (error) {
     console.error(error);
