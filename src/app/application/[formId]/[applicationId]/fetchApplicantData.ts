@@ -2,7 +2,7 @@ import instance from "@/lib/instance";
 
 const fetchApplicantData = async (applicationId: string) => {
   const response = await instance(
-    `${process.env.NEXT_PUBLIC_API_URL}/application/${applicationId}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/applications/${applicationId}`,
     {
       method: "GET",
       headers: { "content-type": "application/json" },

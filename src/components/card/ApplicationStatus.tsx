@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import getCurrentTime from "@/utils/getCurrentTime";
 import translateStatus from "@/utils/translateStatus";
@@ -30,11 +32,19 @@ const ApplicationStatus = ({
         </span>
         <span>{formattedCreatedTime}</span>
       </div>
-      <div className="flex justify-between border-b border-b-line-100 py-4 text-md text-black-400 pc:border-none">
+      <div className="flex items-center justify-between gap-2 border-b border-b-line-100 py-4 text-md text-black-400 pc:border-none">
         <span className="text-black-100">진행 상태</span>
         {role === "OWNER" && (
-          <button onClick={() => openModal("SelectProgressModal")}>
-            <Image src="/icon/write-black.svg" width={36} height={36} alt="" />
+          <button
+            onClick={() => openModal("SelectProgressModal")}
+            className="mr-auto"
+          >
+            <Image
+              src="/icon/write-black.svg"
+              width={28}
+              height={28}
+              alt="상태 수정 버튼"
+            />
           </button>
         )}
         <span>{translatedStatus}</span>

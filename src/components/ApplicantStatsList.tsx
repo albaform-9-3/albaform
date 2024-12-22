@@ -7,7 +7,7 @@ import formatExperienceMonth from "@/utils/formatExperienceMonth";
 import translateStatus from "@/utils/translateStatus";
 import LoadingSpinner from "./spinner/LoadingSpinner";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 interface ApplicantData {
   applicantId: number;
@@ -24,6 +24,7 @@ interface ApplicantData {
 }
 
 const ApplicantStatsList = () => {
+  const router = useRouter();
   const [list, setList] = useState<ApplicantData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [orderExperience, setOrderExperience] = useState<"asc" | "desc">("asc");
@@ -37,7 +38,7 @@ const ApplicantStatsList = () => {
         const res = await instance(
           `${process.env.NEXT_PUBLIC_API_URL}/forms/${formId}/applications?limit=10&orderExperience=${orderExperience}&orderByStatus=${orderByStatus}`
         );
-        setList(res.data.data);
+        setList(res.data);
         setIsLoading(false);
       } catch (error) {
         console.error("지원자 현황 조회에 실패했습니다", error);
@@ -45,6 +46,8 @@ const ApplicantStatsList = () => {
     };
     fetchApplicantList();
   }, [formId, orderExperience, orderByStatus]);
+
+  console.log("지원자 리스트:", list);
 
   const toggleSortButton = (mode: string) => {
     if (mode === "experience")
@@ -107,7 +110,10 @@ const ApplicantStatsList = () => {
                   list.map((el) => (
                     <tr
                       key={el.id}
-                      className="h-[72px] w-[375px] border-t border-t-line-100 text-left pc:text-xl"
+                      className="h-[72px] w-[375px] cursor-pointer border-t border-t-line-100 text-left hover:text-orange-300 pc:text-xl"
+                      onClick={() =>
+                        router.push(`/application/${formId}/${el.id}`)
+                      }
                     >
                       <td className="pl-4 underline">{el.name}</td>
                       <td className="pl-5">

@@ -1,13 +1,11 @@
-import Title from "@/app/addform/components/Title";
+import fetchApplicantData from "./fetchApplicantData";
+import Title from "@/app/alba/components/Title";
 import fetchAlbarformDetailData from "@/app/alba/[formId]/fetchAlbarformDetailData";
 import Content from "@/app/alba/components/Content";
 import MyApplication from "@/app/alba/components/MyApplication";
-import fetchApplicationData from "@/app/myapply/[formId]/fetchApplicationData";
 import ApplicationStatus from "@/components/card/ApplicationStatus";
 import Carousel from "@/components/Carousel/Carousel";
 import { AlbaformDetailData, MyApplicationData } from "@/types/alba";
-import { cookies } from "next/headers";
-import fetchApplicantData from "./fetchApplicantData";
 
 export const metadata = {
   title: "지원자 상세 보기",
@@ -23,9 +21,7 @@ const MyApplicantDetailPage = async ({
 }: MyApplicantDetailPageProps) => {
   let albarformData: AlbaformDetailData;
   let myApplicantData: MyApplicationData;
-  const cookie = await cookies();
-  const role = cookie.get("role")?.value;
-  const { applicationId } = await params;
+  const { formId, applicationId } = await params;
 
   try {
     [albarformData, myApplicantData] = await Promise.all([
@@ -58,13 +54,13 @@ const MyApplicantDetailPage = async ({
         <section className="pc:col-start-2 pc:row-start-1">
           <ApplicationStatus
             recruitmentEndDate={albarformData.recruitmentEndDate}
-            createdAt={myApplicationData.createdAt}
-            status={myApplicationData.status}
-            role={role as string}
+            createdAt={myApplicantData.createdAt}
+            status={myApplicantData.status}
+            role="OWNER"
           />
         </section>
         <section className="mt-8 pc:col-start-2 pc:row-start-2 pc:-mt-48">
-          <MyApplication info={myApplicationData} />
+          <MyApplication info={myApplicantData} />
         </section>
       </div>
     </>

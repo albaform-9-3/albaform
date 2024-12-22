@@ -33,7 +33,7 @@ const HomePage = () => {
             <Image src="/logo/albaform.svg" fill alt="alabaform" />
           </div>
           <span className="mt-[24px] text-xl text-white pc:mt-[32px] pc:text-[56px]">
-            한 곳에서 관리하는 알바 구인 플랫폼{" "}
+            한 곳에서 관리하는 알바 구인 플랫폼
           </span>
           <div className="mt-[48px] rounded-[100px] bg-blue-300 px-[24px] py-[16px] text-lg text-white pc:mt-[60px] pc:px-[36px] pc:py-[24px] pc:text-2xl">
             <LandingButton>알바폼 시작하기</LandingButton>
