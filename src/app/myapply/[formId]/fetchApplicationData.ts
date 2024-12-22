@@ -5,7 +5,7 @@ const fetchApplicationData = async (
   role: string | undefined
 ) => {
   const response = await instance(
-    role
+    role === "APPLICANT"
       ? `${process.env.NEXT_PUBLIC_API_URL}/forms/${formId}/my-application`
       : `${process.env.NEXT_PUBLIC_API_URL}/forms/${formId}/my-application/verify`, // role이 undefined이면 비회원이라는 뜻
     {

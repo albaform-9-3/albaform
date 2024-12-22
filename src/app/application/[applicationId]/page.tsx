@@ -1,8 +1,13 @@
 import Title from "@/app/addform/components/Title";
-import Content from "@/app/alba/[formId]/components/Content";
+import fetchAlbarformDetailData from "@/app/alba/[formId]/fetchAlbarformDetailData";
+import Content from "@/app/alba/components/Content";
+import MyApplication from "@/app/alba/components/MyApplication";
+import fetchApplicationData from "@/app/myapply/[formId]/fetchApplicationData";
+import ApplicationStatus from "@/components/card/ApplicationStatus";
 import Carousel from "@/components/Carousel/Carousel";
-import { AlbaformDetailData } from "@/types/alba";
+import { AlbaformDetailData, MyApplicationData } from "@/types/alba";
 import { cookies } from "next/headers";
+import fetchApplicantData from "./fetchApplicantData";
 
 export const metadata = {
   title: "지원자 상세 보기",
@@ -17,15 +22,15 @@ const MyApplicantDetailPage = async ({
   params,
 }: MyApplicantDetailPageProps) => {
   let albarformData: AlbaformDetailData;
-  let myApplicationData: MyApplicationData;
+  let myApplicantData: MyApplicationData;
   const cookie = await cookies();
   const role = cookie.get("role")?.value;
-  const { formId } = await params;
+  const { applicationId } = await params;
 
   try {
-    [albarformData, myApplicationData] = await Promise.all([
+    [albarformData, myApplicantData] = await Promise.all([
       fetchAlbarformDetailData(formId),
-      fetchApplicationData(formId, role),
+      fetchApplicantData(applicationId),
     ]);
   } catch (error) {
     console.error(error);
