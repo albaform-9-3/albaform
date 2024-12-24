@@ -62,8 +62,6 @@ const AlbarformDetailPage = async ({ params }: PageProps) => {
     );
   }
 
-  console.log("스크랩되었나요?", data.isScrapped);
-
   return (
     <>
       {data.imageUrls && <Carousel imageUrls={data.imageUrls} />}

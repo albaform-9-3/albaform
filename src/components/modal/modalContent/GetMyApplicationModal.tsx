@@ -14,12 +14,15 @@ import { useModal } from "@/hooks/useModal";
 import { useParams, useRouter } from "next/navigation";
 import { getMyApplicationAction } from "../modalActions/getMyApplicationAction";
 import { useToast } from "@/hooks/useToast";
+import { useSetAtom } from "jotai";
+import { nonMemberInfoAtom } from "@/atoms/nonMemberInfoAtom";
 
 const GetMyApplicationModal = () => {
   const { closeModal } = useModal();
   const { addToast } = useToast();
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const setNonMemberInfo = useSetAtom(nonMemberInfoAtom);
   const router = useRouter();
   const params = useParams();
   const formId = params.formId as string;
@@ -48,6 +51,7 @@ const GetMyApplicationModal = () => {
       const response = await getMyApplicationAction(formData, formId);
 
       if (response.status === 200) {
+        setNonMemberInfo(response.data);
         closeModal();
 
         router.push(`/myapply/${formId}`); //지원 상세 조회 페이지로 이동

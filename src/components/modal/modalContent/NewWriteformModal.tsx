@@ -4,27 +4,36 @@ import Image from "next/image";
 import ModalContainer from "../modalContainer/ModalContainer";
 import SolidButton from "@/components/button/SolidButton";
 import { useModal } from "@/hooks/useModal";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useToast } from "@/hooks/useToast";
+import { useSetAtom } from "jotai";
+import { newWriteAtom } from "@/atoms/newWrite";
 
-const PatchAlbaformModal = () => {
+const NewWriteformModal = () => {
   const { closeModal } = useModal();
-  const router = useRouter();
   const { addToast } = useToast();
+  const pathname = usePathname();
+  const router = useRouter();
+  const setNewWrite = useSetAtom(newWriteAtom);
 
-  const handleMoveAddform = () => {
-    addToast("작성 중인 알바폼을 불러왔습니다.", "info");
+  const handleContinueWriteClick = () => {
+    addToast("작성 중인 폼을 불러왔습니다.", "info");
     closeModal();
-    router.push("/addform");
   };
 
   const handleNewWriteClick = () => {
-    const steps = ["stepOne", "stepTwo", "stepThree"];
-    steps.forEach((step) => localStorage.removeItem(step));
+    if (pathname.startsWith("/addform")) {
+      const steps = ["stepOne", "stepTwo", "stepThree"];
+      steps.forEach((step) => localStorage.removeItem(step));
+    }
 
-    addToast("알바폼을 새로 작성해주세요.", "info");
+    if (pathname.startsWith("/apply")) {
+      localStorage.removeItem("applyFormData");
+    }
+    addToast("폼을 새로작성해주세요.", "info");
     closeModal();
-    router.push("/addform");
+    setNewWrite(true);
+    router.push(pathname);
   };
 
   return (
@@ -38,13 +47,13 @@ const PatchAlbaformModal = () => {
             className="object-cover"
           />
         </div>
-        <h2 className="modal-title">작성 중인 알바폼이 있어요!</h2>
+        <h2 className="modal-title">작성 중인 폼이 있어요!</h2>
         <p className="modal-sub-title">이어서 작성하시겠어요?</p>
         <div className="mt-6 flex w-[327px] flex-col gap-2 pc:w-[360px]">
           <SolidButton
             style="orange300"
             type="button"
-            onClick={handleMoveAddform}
+            onClick={handleContinueWriteClick}
           >
             이어쓰기
           </SolidButton>
@@ -61,4 +70,4 @@ const PatchAlbaformModal = () => {
   );
 };
 
-export default PatchAlbaformModal;
+export default NewWriteformModal;

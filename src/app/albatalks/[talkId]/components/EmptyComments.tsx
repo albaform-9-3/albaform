@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const EmptyComment = () => {
   return (
-    <div className="mx-auto flex flex-col items-center justify-center gap-y-6 pb-52 pt-14 pc:pb-[244px] pc:pt-11 tablet:pb-[198px] tablet:pt-10">
+    <div className="mx-auto mt-32 flex flex-col items-center justify-center gap-y-6 pb-52 pt-14 pc:pb-[244px] pc:pt-11 tablet:pb-[198px] tablet:pt-10">
       <Image
         src={writeIcon}
         width={80}

@@ -4,7 +4,7 @@ import { useAtomValue } from "jotai";
 import { modalAtom } from "@/atoms/modalAtomStore";
 import CloseAlbaformModal from "../modalContent/ClosedAlbaformModal";
 import DeleteAlbaformModal from "../modalContent/DeleteAlbaformModal";
-import PatchAlbaformModal from "../modalContent/PatchAlbaformModal";
+import NewWriteformModal from "../modalContent/NewWriteformModal";
 import GetMyApplicationModal from "../modalContent/GetMyApplicationModal";
 import MyApplicationModal from "../modalContent/MyApplicationModal";
 import SelectProgressModal from "../modalContent/SelectProgressModal";
@@ -25,8 +25,8 @@ const ModalManager = () => {
       return <CloseAlbaformModal />;
     case "DeleteAlbaformModal":
       return <DeleteAlbaformModal />;
-    case "PatchAlbaformModal":
-      return <PatchAlbaformModal />;
+    case "NewWriteformModal":
+      return <NewWriteformModal />;
     case "GetMyApplicationModal":
       return <GetMyApplicationModal />;
     case "MyApplicationModal":

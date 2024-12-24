@@ -7,7 +7,6 @@ import { useState } from "react";
 import { getMyScraps } from "../getMyScraps";
 import AlbarPreview from "@/components/card/AlbarPreview";
 import { MyScrap } from "@/types/scrap";
-import BlurWrapper from "@/app/albalist/components/BlurWrapper";
 
 interface ResponseType {
   data?: MyScrap[];
@@ -75,13 +74,7 @@ const MyScrapList = ({
         <ul className="grid grid-cols-1 gap-4 pc:grid-cols-3 pc:gap-x-[25px] pc:gap-y-[48px] tablet:grid-cols-2">
           {myScraps.map((myScrap) => (
             <li key={myScrap.id}>
-              {myScrap.isPublic ? (
-                <AlbarPreview info={myScrap} role={role} />
-              ) : (
-                <BlurWrapper isPublic={myScrap.isPublic}>
-                  <AlbarPreview info={myScrap} role={role} />
-                </BlurWrapper>
-              )}
+              <AlbarPreview info={myScrap} role={role} />
             </li>
           ))}
         </ul>

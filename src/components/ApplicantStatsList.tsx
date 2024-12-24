@@ -49,6 +49,8 @@ const ApplicantStatsList = () => {
     fetchApplicantList();
   }, [formId, orderExperience, orderByStatus]);
 
+  console.log("지원자 리스트:", list);
+
   const toggleSortButton = (mode: string) => {
     if (mode === "experience")
       orderExperience === "asc"
