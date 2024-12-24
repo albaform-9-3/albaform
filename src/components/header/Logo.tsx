@@ -1,3 +1,5 @@
+"use client";
+
 import useViewPort from "@/hooks/useViewport";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +18,7 @@ const Logo = () => {
           }
           fill
           alt="logo"
+          loading="eager"
         />
       </Link>
     </h1>

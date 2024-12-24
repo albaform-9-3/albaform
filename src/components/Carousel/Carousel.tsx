@@ -26,7 +26,12 @@ const Carousel = ({ imageUrls }: { imageUrls: string[] }) => {
             isRenderingIndex === index ? "opacity-100" : "opacity-0"
           )}
         >
-          <Image src={imageUrl} fill alt="캐러샐 이미지" />
+          <Image
+            src={imageUrl || "/logo/albaform.svg"}
+            fill
+            alt="캐러샐 이미지"
+            priority={index === 0}
+          />
         </figure>
       ))}
       {/* 인디케이터 */}

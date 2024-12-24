@@ -1,18 +1,18 @@
 import Carousel from "@/components/Carousel/Carousel";
-import fetchAlbarformDetailData from "./fetchAlbarformDetailData";
-import Content from "../components/Content";
-import Title from "../components/Title";
-import StoreLocation from "../components/StoreLocation";
-import SimpleRequirements from "../components/SimpleRequirements";
-import EmployerInfo from "../components/EmployerInfo";
-import DetailRequirements from "../components/DetailRequirements";
-import NoticeApplicant from "../components/NoticeApplicant";
-import NoticeIsClosed from "../components/NoticeIsClosed";
-import ScrapAndShareButton from "../components/ScrapAndShareButton";
-import ApllicantActionButtons from "../components/ApllicantActionButtons";
-import OwnerActionButtons from "../components/OwnerActionButtons";
-import { AlbaformDetailData } from "@/types/alba";
+import fetchAlbaformData from "./fetchAlbaformData";
+import Content from "./components/Content";
+import Title from "./components/Title";
+import SimpleRequirements from "./components/SimpleRequirements";
+import StoreLocation from "./components/StoreLocation";
+import EmployerInfo from "./components/EmployerInfo";
+import DetailRequirements from "./components/DetailRequirements";
+import NoticeApplicant from "./components/NoticeApplicant";
+import NoticeIsClosed from "./components/NoticeIsClosed";
+import ScrapAndShareButton from "./components/ScrapAndShareButton";
+import ApllicantActionButtons from "./components/ApllicantActionButtons";
+import OwnerActionButtons from "./components/OwnerActionButtons";
 import { cookies } from "next/headers";
+import { AlbaformDetailData } from "@/types/alba";
 import { cls } from "@/utils/dynamicTailwinds";
 
 type PageProps = {
@@ -64,7 +64,7 @@ const AlbarformDetailPage = async ({ params }: PageProps) => {
 
   return (
     <>
-      {data.imageUrls && <Carousel imageUrls={data.imageUrls} />}
+      <Carousel imageUrls={data.imageUrls} />
       <div className="mt-8 grid gap-[32px] pc:mt-[80px] pc:grid-cols-[770px_640px] pc:grid-rows-[432px_336px_230px_562px] pc:justify-items-center pc:gap-0 pc:gap-x-[150px] pc:gap-y-[40px] pc:grid-areas-layout tablet:w-[550px] tablet:grid-cols-1 tablet:grid-rows-[270px_220px_156px_396px_302px_340px_158px] mobile:w-[327px] mobile:grid-cols-1 mobile:grid-rows-[270px_116px_156px_396px_302px_340px_158px]">
         <section className="self-center pc:grid-in-box1">
           <Title info={data} />
