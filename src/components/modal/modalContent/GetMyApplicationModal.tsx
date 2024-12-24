@@ -48,16 +48,28 @@ const GetMyApplicationModal = () => {
         formData.append(key, value || "");
       });
 
-      const response = await getMyApplicationAction(formData, formId);
+      console.log(formData);
 
-      if (response.status === 200) {
-        setNonMemberInfo(response.data);
+      const response = await fetch("/api/nonmemberinfo", {
+        method: "POST",
+        body: JSON.stringify({
+          ...Object.fromEntries(formData.entries()),
+          formId,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("모달 리스폰스 베드 :", response);
+
+      if (response.ok) {
         closeModal();
-
+        console.log("모달 리스폰스 굳 :", response);
         router.push(`/myapply/${formId}`); //지원 상세 조회 페이지로 이동
       } else {
-        console.error(response.message, response.status);
-        addToast(response.message as string, "warning");
+        const error = await response.json();
+        console.error(error.message);
+        addToast(error.message as string, "warning");
       }
     } catch (error) {
       console.error("지원 내역 조회 에러 발생", error);
