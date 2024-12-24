@@ -50,26 +50,16 @@ const GetMyApplicationModal = () => {
 
       console.log(formData);
 
-      const response = await fetch("/api/nonmemberinfo", {
-        method: "POST",
-        body: JSON.stringify({
-          ...Object.fromEntries(formData.entries()),
-          formId,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log("모달 리스폰스 베드 :", response);
+      const response = await getMyApplicationAction(formData, formId);
 
-      if (response.ok) {
+      if (response.status === 200) {
+        setNonMemberInfo(response.data);
         closeModal();
-        console.log("모달 리스폰스 굳 :", response);
+
         router.push(`/myapply/${formId}`); //지원 상세 조회 페이지로 이동
       } else {
-        const error = await response.json();
-        console.error(error.message);
-        addToast(error.message as string, "warning");
+        console.error(response.message);
+        addToast(response.message as string, "warning");
       }
     } catch (error) {
       console.error("지원 내역 조회 에러 발생", error);
