@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const HeaderNavigation = ({ isAuthPage }: { isAuthPage: boolean }) => {
   const currentPathname = usePathname();
-  let isNotLogin: boolean;
+  const [isNotLogin, setIsNotLogin] = useState(true);
 
-  if (typeof window !== "undefined")
-    isNotLogin = localStorage.getItem("isLogin") === null;
+  useEffect(() => {
+    setIsNotLogin(localStorage.getItem("isLogin") === null);
+  }, []);
 
   if (isAuthPage) return null;
 
