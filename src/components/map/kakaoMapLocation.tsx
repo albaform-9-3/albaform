@@ -10,12 +10,12 @@ interface KakaoMapProps {
 const KakaoMapLocation = ({ location, onLocationFound }: KakaoMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<any>(null); // 카카오맵 인스턴스 저장
-  const markerRef = useRef<any>(null); // 마커 인스턴스 저장 (useRef로 관리)
+  const markerRef = useRef<any>(null); // 마커 인스턴스 저장
+  const infoWindowRef = useRef<any>(null); // InfoWindow 인스턴스 저장
 
   // 지도 초기화
   useEffect(() => {
     if (window.kakao && window.kakao.maps) {
-      // Kakao Maps SDK 로드 후 실행
       window.kakao.maps.load(() => {
         if (mapRef.current) {
           const mapOption = {
@@ -33,6 +33,12 @@ const KakaoMapLocation = ({ location, onLocationFound }: KakaoMapProps) => {
           });
           markerRef.current = initialMarker;
 
+          // InfoWindow 초기화 (초기 내용은 임시로 설정)
+          const initialInfoWindow = new window.kakao.maps.InfoWindow({
+            content: `<div style="padding:5px;">로딩 중...</div>`, // 초기 내용
+          });
+          infoWindowRef.current = initialInfoWindow;
+
           // 클릭 이벤트 등록
           window.kakao.maps.event.addListener(
             newMap,
@@ -48,6 +54,7 @@ const KakaoMapLocation = ({ location, onLocationFound }: KakaoMapProps) => {
     } else {
       console.error("Kakao Maps SDK가 로드되지 않았습니다.");
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -68,7 +75,7 @@ const KakaoMapLocation = ({ location, onLocationFound }: KakaoMapProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location, map]);
 
-  // 맵 중심 및 마커 업데이트
+  // 맵 중심 및 마커, InfoWindow 업데이트
   const updateMapCenterAndMarker = (coords: any) => {
     if (map) {
       map.setCenter(coords); // 맵 중심 변경
@@ -84,6 +91,10 @@ const KakaoMapLocation = ({ location, onLocationFound }: KakaoMapProps) => {
       });
       markerRef.current = newMarker;
     }
+
+    if (infoWindowRef.current) {
+      infoWindowRef.current.open(map, markerRef.current); // 마커 위에 InfoWindow 열기
+    }
   };
 
   // 좌표로 주소 가져오기
@@ -96,6 +107,14 @@ const KakaoMapLocation = ({ location, onLocationFound }: KakaoMapProps) => {
         if (status === window.kakao.maps.services.Status.OK) {
           const address = result[0].address.address_name; // 변환된 주소
           onLocationFound(address); // 주소 콜백 호출
+
+          // InfoWindow 내용 동적으로 업데이트
+          if (infoWindowRef.current) {
+            infoWindowRef.current.setContent(
+              `<div style="padding:5px;">${address}</div>`
+            );
+            infoWindowRef.current.open(map, markerRef.current); // 마커 위에 InfoWindow 열기
+          }
         } else {
           console.error("좌표로 주소를 변환할 수 없습니다.");
         }

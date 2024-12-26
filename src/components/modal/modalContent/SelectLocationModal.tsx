@@ -6,7 +6,7 @@ import SearchLocation from "@/components/input/SearchLocation";
 import { useSetAtom } from "jotai";
 import { addressAtom } from "@/atoms/addressAtom";
 import { useToast } from "@/hooks/useToast";
-import KakaoMap3 from "@/components/map/kakaoMapLocation";
+import KakaoMap3 from "@/components/map/KakaoMapLocation";
 import useViewPort from "@/hooks/useViewport";
 
 const SelectLocationModal = () => {
